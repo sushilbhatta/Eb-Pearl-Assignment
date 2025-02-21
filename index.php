@@ -184,6 +184,62 @@
         </article> 
     </div>   
  </section>
+ <section id="task-manager">
+    <header class="task-manager__header">
+        <h1 class="task-manager__title">Task Manager</h1>
+        <p class="task-manager__subtitle">Your daily to do list</p>
+    </header>
+        
+        <div class="task-card">
+            <ul class="task-list">
+                <li class="task-list__item">
+                    <div class="task-list__checkbox-wrapper">
+                        <input type="checkbox" class="task-list__checkbox" id="task1">
+                        <label for="task1" class="task-list__text">Task item one</label>
+                    </div>
+                    <button class="task-list__delete">
+                        <i class="fa-solid fa-x fa-sm"></i>
+                        <span >Delete</span></button>
+                </li>
+                <li class="task-list__item">
+                    <div class="task-list__checkbox-wrapper">
+                        <input type="checkbox" class="task-list__checkbox" id="task2" checked>
+                        <label for="task2" class="task-list__text">Task Item Two</label>
+                    </div>
+                </li>
+            </ul>
+
+            <form class="task-form">
+                <input type="text" class="task-form__input" placeholder="Add new task">
+                <button type="submit" class="btn task-form__button">Add Task</button>
+            </form>
+        </div>
+    </section>
+    <section id="contact-section">
+    <header class="contact-section__header">
+        <h1 class="task-manager__title">Contact us</h1>
+        <p class="task-manager__subtitle">Speak with our team to see how we can help your business.</p>
+    </header>
+        <form class="contact-form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="name" placeholder="Your name" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" class="form-control" id="email" placeholder="Email" required>
+            </div>
+            
+            <div class="form-group">
+                <input type="tel" class="form-control" id="phone" placeholder="Your best contact number" required>
+            </div>
+            
+            <div class="form-group">
+                <textarea class="form-control" id="business" placeholder="Business or company name" required></textarea>
+            </div>
+            
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </section>
     </main>
 </body>
 </html>
