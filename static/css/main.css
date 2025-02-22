@@ -719,11 +719,17 @@ main {
 }
 
 .task-list__item {
+    cursor: move;
     display: flex;
     align-items: center;
     justify-content: space-between;
 
 
+
+}
+
+.task-list__item.dragging {
+    opacity: 0.5;
 }
 
 .task-list__checkbox-wrapper {
@@ -793,6 +799,11 @@ main {
     font-size: 1rem;
 }
 
+.task-form__input:focus-visible,
+.form-control:focus-visible {
+    outline: none;
+}
+
 .task-form__input::placeholder,
 .form-control::placeholder {
     color: hsla(0, 0%, 62%, 1);
@@ -821,6 +832,20 @@ main {
 
     /* contact form */
 
+}
+
+.error-message {
+    color: red;
+    font-size: 0.9em;
+    display: block;
+}
+
+.success-message {
+    color: green;
+    margin-top: 10px;
+    padding: 10px;
+    border: 1px solid green;
+    border-radius: 4px;
 }
 
 
