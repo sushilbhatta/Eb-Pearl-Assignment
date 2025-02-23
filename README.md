@@ -1,4 +1,5 @@
-# Project Name
+## Introduction
+This guide helps you set up a full-stack developer project on your local machine, featuring a responsive home page, a task manager, and a contact form, all built with HTML, CSS, JavaScript, and PHP, using a MySQL database.
 
 A brief description of your project.
 
