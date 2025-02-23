@@ -42,7 +42,7 @@ Edit the `config.php` file in your project directory:
 $host = 'localhost';
 $username = 'root'; // Default XAMPP user
 $password = ''; // Default XAMPP password (leave blank)
-$database = 'mydatabase';
+$database = 'myproject_db';
 
 $conn = new mysqli($host, $username, $password, $database);
 if ($conn->connect_error) {
@@ -72,5 +72,5 @@ Provide details on how to use the project.
 
 
 ## Contact
-For issues or inquiries, contact [sushilbhatta00@gmail.com](mailto:sushilbhatta00@gmail.com).
+For issues or inquiries, contact(mailto:sushilbhatta00@gmail.com).
 
