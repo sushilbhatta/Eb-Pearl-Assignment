@@ -50,11 +50,17 @@ if ($conn->connect_error) {
 }
 ```
 
+### 5. Pre-populate the payment-features table automatically
+
+```
+http://localhost/Eb-Pearl-Assignment/setup.php
+```
+
 ### 6. Run the Project
 Open your browser and navigate to:
 
 ```
-http://localhost/Eb-Pearl-Assignment/
+http://localhost/Eb-Pearl-Assignment/index.php
 ```
 
 ## Usage
