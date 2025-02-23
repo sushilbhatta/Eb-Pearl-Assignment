@@ -8,7 +8,7 @@
         <p class="task-manager__subtitle">Your daily to do list</p>
     </header>
 
-    <div class="task-card">
+    <section class="task-card">
         <ul class="task-list" id="task-list">
             <?php foreach ($tasks as $task): ?>
             <li class="task-list__item" data-id="<?php echo $task['id']; ?>">
@@ -21,15 +21,17 @@
                 </div>
             </li>
             <?php endforeach; ?>
+            <?php if (!empty($tasks)): ?>
+            <button class="task-list__delete" onclick="deleteCheckedTasks()">
+                <i class="fa-solid fa-x fa-sm"></i>
+                <span>Delete</span>
+            </button>
+            <?php endif; ?>
         </ul>
-        <button class="task-list__delete" onclick="deleteCheckedTasks()">
-            <i class="fa-solid fa-x fa-sm"></i>
-            <span>Delete</span>
-        </button>
-
+        <!-- task add button -->
         <form class="task-form" id="task-form" onsubmit="addTask(event)">
             <input type="text" class="task-form__input" id="task-title" placeholder="Add new task" required>
             <button type="submit" class="btn task-form__button">Add Task</button>
         </form>
-    </div>
+    </section>
 </section>

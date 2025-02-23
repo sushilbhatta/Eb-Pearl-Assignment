@@ -1,4 +1,28 @@
-// static/js/task-manager.js
+// Function to update delete button visibility
+function updateDeleteButton() {
+  const taskList = document.getElementById("task-list");
+  const taskItems = taskList.querySelectorAll(".task-list__item");
+  let deleteButton = taskList.querySelector(".task-list__delete");
+
+  if (taskItems.length === 0) {
+    // Remove delete button if no tasks exist
+    if (deleteButton) {
+      deleteButton.remove();
+    }
+  } else {
+    // Add delete button if tasks exist and it’s not already present
+    if (!deleteButton) {
+      deleteButton = document.createElement("button");
+      deleteButton.className = "task-list__delete";
+      deleteButton.innerHTML =
+        '<i class="fa-solid fa-x fa-sm"></i><span>Delete</span>';
+      deleteButton.onclick = deleteCheckedTasks;
+      taskList.appendChild(deleteButton);
+    }
+  }
+}
+
+// Modified addTask function
 async function addTask(event) {
   event.preventDefault();
   const title = document.getElementById("task-title").value;
@@ -21,22 +45,26 @@ async function addTask(event) {
       li.dataset.id = task.id;
       li.draggable = true;
       li.innerHTML = `
-                <div class="task-list__checkbox-wrapper">
-                    <input type="checkbox" class="task-list__checkbox" id="task-${
-                      task.id
-                    }" ${
-        task.completed ? "checked" : ""
-      } onchange="toggleTask(${task.id})">
-                    <label for="task-${task.id}" class="task-list__text">${
+              <div class="task-list__checkbox-wrapper">
+                  <input type="checkbox" class="task-list__checkbox" id="task-${
+                    task.id
+                  }" 
+                      ${task.completed ? "checked" : ""} onchange="toggleTask(${
+        task.id
+      })">
+                  <label for="task-${task.id}" class="task-list__text">${
         task.title
       }</label>
-                </div>
-            `;
+              </div>
+          `;
       li.addEventListener("dragstart", handleDragStart);
       li.addEventListener("dragover", handleDragOver);
       li.addEventListener("drop", handleDrop);
       li.addEventListener("dragend", handleDragEnd);
-      taskList.insertBefore(li, taskList.firstChild); // Add new task at the top
+      taskList.insertBefore(li, taskList.firstChild);
+
+      // Update delete button visibility after adding a task
+      updateDeleteButton();
     } else {
       alert(data.error || "Failed to add task");
     }
@@ -48,27 +76,13 @@ async function addTask(event) {
   document.getElementById("task-form").reset();
 }
 
-async function toggleTask(id) {
-  try {
-    const response = await fetch("controllers/task-ajax.php", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: `action=toggle&id=${id}`,
-    });
-    const data = await response.json();
-    if (!data.success) {
-      alert("Failed to toggle task");
-    }
-  } catch (error) {
-    console.error("Fetch error:", error);
-    alert("Error toggling task: " + error.message);
-  }
-}
-
+// Modified deleteCheckedTasks function
 async function deleteCheckedTasks() {
   const checkedTasks = document.querySelectorAll(
     ".task-list__checkbox:checked"
   );
+  const taskList = document.getElementById("task-list");
+
   if (checkedTasks.length === 0) {
     alert("No tasks selected to delete");
     return;
@@ -93,19 +107,9 @@ async function deleteCheckedTasks() {
           const li = checkbox.closest(".task-list__item");
           li.remove();
         });
-        // Move delete button to new first task if list isn't empty
-        const taskList = document.getElementById("task-list");
-        if (
-          taskList.children.length > 0 &&
-          !taskList.firstChild.querySelector(".task-list__delete")
-        ) {
-          const deleteButton = document.createElement("button");
-          deleteButton.className = "task-list__delete";
-          deleteButton.innerHTML =
-            '<i class="fa-solid fa-x fa-sm"></i><span>Delete</span>';
-          deleteButton.onclick = deleteCheckedTasks;
-          taskList.firstChild.appendChild(deleteButton);
-        }
+
+        // Update delete button visibility after deletion
+        updateDeleteButton();
       } else {
         alert(data.error || "Failed to delete tasks");
       }
@@ -116,9 +120,26 @@ async function deleteCheckedTasks() {
   }
 }
 
-// Drag-and-Drop Functions
-let draggedItem = null;
+// Toggle task function (unchanged)
+async function toggleTask(id) {
+  try {
+    const response = await fetch("controllers/task-ajax.php", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `action=toggle&id=${id}`,
+    });
+    const data = await response.json();
+    if (!data.success) {
+      alert("Failed to toggle task");
+    }
+  } catch (error) {
+    console.error("Fetch error:", error);
+    alert("Error toggling task: " + error.message);
+  }
+}
 
+// Drag-and-Drop Functions (unchanged)
+let draggedItem = null;
 function handleDragStart(event) {
   draggedItem = event.target.closest(".task-list__item");
   event.dataTransfer.effectAllowed = "move";
@@ -173,7 +194,7 @@ async function handleDragEnd(event) {
   }
 }
 
-// Initialize Drag-and-Drop on Page Load
+// Initialize on page load
 document.addEventListener("DOMContentLoaded", () => {
   const taskItems = document.querySelectorAll(".task-list__item");
   taskItems.forEach((item) => {
@@ -183,4 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
     item.addEventListener("drop", handleDrop);
     item.addEventListener("dragend", handleDragEnd);
   });
+
+  // Set initial delete button state
+  updateDeleteButton();
 });
