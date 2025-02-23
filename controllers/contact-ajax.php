@@ -2,14 +2,11 @@
 // controllers/contact-ajax.php
 require_once __DIR__ . '/../models/Contact.php';
 
-// Suppress all output except JSON
 ob_start();
 header('Content-Type: application/json');
-
-// Disable error display to prevent HTML output
 ini_set('display_errors', 0);
 ini_set('display_startup_errors', 0);
-error_reporting(E_ALL); // Still log errors to file
+error_reporting(E_ALL); 
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     echo json_encode(['success' => false, 'message' => 'Invalid request method']);
@@ -51,11 +48,11 @@ $contactModel = new Contact();
 try {
     $contactModel->saveContact($name, $email, $message);
 ;
-$to = $email; // Send confirmation to the user
+$to = $email; 
 $subject = "Thank You For Contacting Us";
 $body = "Dear $name,\n\nWe've received your message and will get back to you shortly.\n\nYour Message:\n$message";
-$headers = "From: no-reply@susilbhatta00@gmail.com" . "\r\n"; // Replace with your domain email
-$headers .= "Reply-To: susilbhatta00@gmail.com" . "\r\n"; // Replace with your support email
+$headers = "From: no-reply@susilbhatta00@gmail.com" . "\r\n";
+$headers .= "Reply-To: susilbhatta00@gmail.com" . "\r\n"; 
 $headers .= "Content-Type: text/plain; charset=UTF-8";
 
 $mailSent = mail($to, $subject, $body, $headers);

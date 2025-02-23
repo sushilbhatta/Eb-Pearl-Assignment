@@ -15,8 +15,8 @@
     <div class="hero-img__container">
         <div class="slider">
             <img src="images/hero.png" alt="Hero Image 1" class="hero__image slide" data-index="0">
-            <img src="images/hero.png" alt="Hero Image 2" class="hero__image slide" data-index="1">
-            <img src="images/hero.png" alt="Hero Image 3" class="hero__image slide" data-index="2">
+            <img src="https://picsum.photos/id/1/523/523" alt="Hero Image 2" class="hero__image slide" data-index="1">
+            <img src="https://picsum.photos/id/2/523/523" alt="Hero Image 3" class="hero__image slide" data-index="2">
         </div>
     </div>
 </section>
